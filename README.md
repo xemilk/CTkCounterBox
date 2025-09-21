@@ -16,7 +16,7 @@ Fully resizable, styleable, and easy to integrate in any `customtkinter` GUI.
 Clone or download the repo and place the `CTkCounterBox.py` file in the same directory as your project.
 
 ```bash
-git clone https://github.com/your-username/CTkCounterBox.git
+git clone https://github.com/xemilk/CTkCounterBox.git
 ```
 
 Or just copy the CTkCounterBox.py into your project folder manually.
