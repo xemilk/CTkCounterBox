@@ -3,7 +3,8 @@
 A simple **unofficial** `customtkinter` widget to display and adjust a numeric counter using `+` and `–` buttons.  
 Supports **floating-point steps**, **decimal formatting**, **value limiting**, and **signed/unsigned** counting.  
 Fully resizable, styleable, and easy to integrate in any `customtkinter` GUI.
-![Uploading Screenshot_1.png…]()
+<img width="567" height="341" alt="Screenshot_1" src="https://github.com/user-attachments/assets/72e2cbbb-ffdf-427f-bccc-2bf14adc7312" />
+
 
 
 > ❗ **Note:**  
