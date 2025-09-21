@@ -3,11 +3,11 @@
 A simple **unofficial** `customtkinter` widget to display and adjust a numeric counter using `+` and `–` buttons.  
 Supports **floating-point steps**, **decimal formatting**, **value limiting**, and **signed/unsigned** counting.  
 Fully resizable, styleable, and easy to integrate in any `customtkinter` GUI.
+![Uploading Screenshot_1.png…]()
+
 
 > ❗ **Note:**  
 > This widget is **not part of the official** [`customtkinter`](https://github.com/TomSchimansky/CustomTkinter) library.  
-> It is a custom, independently developed component.
-
 ---
 
 ## 📦 Installation
