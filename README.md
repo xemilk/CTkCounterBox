@@ -24,7 +24,7 @@ Or just copy the CTkCounterBox.py into your project folder manually.
 ---
 
 ## Usage
-```
+```python
 import customtkinter as ctk
 from CTkCounterBox import CTkCounterBox
 
@@ -39,7 +39,7 @@ counter.pack(pady=20)```
 ```
 
 # Access or modify value:
-```
+```python
 print(counter.value)      # get current value
 counter.value = 10        # set value
 counter.step = 0.5        # change step size
