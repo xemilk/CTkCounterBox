@@ -16,13 +16,14 @@ Clone or download the repo and place the `CTkCounterBox.py` file in the same dir
 
 ```bash
 git clone https://github.com/your-username/CTkCounterBox.git
+```
 
 Or just copy the CTkCounterBox.py into your project folder manually.
 
 ---
 
 ## Usage
-
+```
 import customtkinter as ctk
 from CTkCounterBox import CTkCounterBox
 
@@ -33,16 +34,18 @@ app = ctk.CTk()
 app.geometry("300x150")
 
 counter = CTkCounterBox(app, start_value=0, step_width=1, decimals=0, signed=True, limit=20)
-counter.pack(pady=20)
+counter.pack(pady=20)```
+```
 
 # Access or modify value:
+```
 print(counter.value)      # get current value
 counter.value = 10        # set value
 counter.step = 0.5        # change step size
 counter.decimals = 2      # change decimal places
 
 app.mainloop()
-
+```
 ## Constructor Arguments
 | Parameter     | Type    | Default  | Description                                                               |
 | ------------- | ------- | -------- | ------------------------------------------------------------------------- |
@@ -66,11 +69,3 @@ app.mainloop()
 | `limit`       | Get or set the absolute value limit                 |
 | `.increase()` | Increases the value (respects `limit`)              |
 | `.decrease()` | Decreases the value (respects `signed` and `limit`) |
-
-## License
-
-📄 License
-
-This project is licensed under the Creative Commons Zero v1.0 Universal (CC0 1.0) license.
-
-You are free to use, modify, distribute, and include this widget in any personal or commercial project.
