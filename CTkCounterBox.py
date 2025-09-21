@@ -1,6 +1,6 @@
 import customtkinter as ctk
 
-class CounterBox(ctk.CTkFrame):
+class CTkCounterBox(ctk.CTkFrame):
     """
     A CustomTkinter widget to display and adjust a numeric counter.
     Supports signed and unsigned values as well as floats with configurable decimal places.
@@ -13,6 +13,7 @@ class CounterBox(ctk.CTkFrame):
         step_width=1.0,
         signed=True,
         decimals=0,
+        limit=None,
         button_size=None, 
         **kwargs
     ):
@@ -24,7 +25,8 @@ class CounterBox(ctk.CTkFrame):
             start_value: Initial counter value (default 0.0).
             step_width: Step size for + and - buttons (default 1.0).
             signed: Allows negative values if True (default True).
-            decimals: Number of decimal places shown (default 2).
+            decimals: Number of decimal places shown (default 0).
+            limit: Maximum absolute value allowed (default 10.0).
             button_size: Width and height of buttons and label (square). 
                          If None, automatic based on font size.
             kwargs: Additional arguments for CTkFrame.
@@ -35,6 +37,7 @@ class CounterBox(ctk.CTkFrame):
         self._step = float(step_width)
         self._signed = signed
         self._decimals = max(0, decimals)
+        self._limit = abs(float(limit))
 
         # Determine button and label size
         if button_size is None:
@@ -93,12 +96,16 @@ class CounterBox(ctk.CTkFrame):
         self._value_label.configure(text=self._format_value())
 
     def increase(self):
-        self._value += self._step
-        self._update_label()
+        new_value = self._value + self._step
+        max_val = self._limit if self._signed else self._limit
+        if new_value <= max_val:
+            self._value = new_value
+            self._update_label()
 
     def decrease(self):
         new_value = self._value - self._step
-        if self._signed or new_value >= 0:
+        min_val = -self._limit if self._signed else 0
+        if new_value >= min_val:
             self._value = new_value
             self._update_label()
 
@@ -108,9 +115,13 @@ class CounterBox(ctk.CTkFrame):
 
     @value.setter
     def value(self, new_value):
-        if self._signed or new_value >= 0:
+        min_val = -self._limit if self._signed else 0
+        max_val = self._limit
+        if min_val <= new_value <= max_val:
             self._value = float(new_value)
             self._update_label()
+        else:
+            raise ValueError(f"Value must be between {min_val} and {max_val}")
 
     @property
     def step(self):
@@ -130,6 +141,11 @@ class CounterBox(ctk.CTkFrame):
     @signed.setter
     def signed(self, allow_signed):
         self._signed = bool(allow_signed)
+        # Optionally reset value to fit new limit
+        min_val = -self._limit if self._signed else 0
+        if self._value < min_val:
+            self._value = min_val
+            self._update_label()
 
     @property
     def decimals(self):
@@ -139,3 +155,22 @@ class CounterBox(ctk.CTkFrame):
     def decimals(self, count):
         self._decimals = max(0, int(count))
         self._update_label()
+
+    @property
+    def limit(self):
+        return self._limit
+
+    @limit.setter
+    def limit(self, limit):
+        if limit <= 0:
+            raise ValueError("Max limit must be positive")
+        self._limit = float(limit)
+        # Adjust value if outside new limits
+        min_val = -self._limit if self._signed else 0
+        max_val = self._limit
+        if self._value < min_val:
+            self._value = min_val
+            self._update_label()
+        elif self._value > max_val:
+            self._value = max_val
+            self._update_label()
